@@ -13,6 +13,8 @@ const int ButtonY1 = 4;
 const int ButtonY2 = 5;
 const int LEDX1 = A0;
 const int LEDY1 = A1;
+const int LEDX2 = A2;
+const int LEDY2 = A3;
 
 int x = 0;
 int y = 0;
@@ -25,6 +27,9 @@ void setup() {
   pinMode(ButtonY2, INPUT);
   pinMode(LEDX1, OUTPUT);
   pinMode(LEDY1, OUTPUT);
+  pinMode(LEDX2, OUTPUT);
+  pinMode(LEDY2, OUTPUT);
+
 
 }
 
@@ -33,11 +38,13 @@ void loop() {
   ButtonX2State = digitalRead(ButtonX2);
   ButtonY1State = digitalRead(ButtonY1);
   ButtonY2State = digitalRead(ButtonY2);
-
-
+  digitalWrite(LEDX2, (ButtonX1State == BUTTON_PRESSED || ButtonX2State == BUTTON_PRESSED) ? HIGH : LOW);
+  digitalWrite(LEDY2, (ButtonY1State == BUTTON_PRESSED || ButtonY2State == BUTTON_PRESSED) ? HIGH : LOW);
+  
   if (ButtonX1State == BUTTON_PRESSED) {
     x++;
     datachanged = true;
+
   } else if (ButtonX2State == BUTTON_PRESSED) {
     x--;
     datachanged = true;
