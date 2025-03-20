@@ -4,7 +4,6 @@ const int BUTTON_PRESSED = LOW;
 const int BUTTON_NOT_PRESSED = HIGH;
 
 int ButtonX1State, ButtonX2State, ButtonY1State, ButtonY2State;
-// bool datachanged = false;
 
 const int ButtonX1 = 2;
 const int ButtonX2 = 3;
@@ -34,8 +33,6 @@ void loop() {
 
   if (ButtonX1State == BUTTON_PRESSED) {
     x++;
-    
-
   } else if (ButtonX2State == BUTTON_PRESSED) {
     x--;
     
@@ -43,23 +40,20 @@ void loop() {
 
   if (ButtonY1State == BUTTON_PRESSED) {
     y++;
-   
   } else if (ButtonY2State == BUTTON_PRESSED) {
     y--;
-   
   }
 
   digitalWrite(LEDX1, (ButtonX1State == BUTTON_PRESSED || ButtonX2State == BUTTON_PRESSED) ? HIGH : LOW);
   digitalWrite(LEDY1, (ButtonY1State == BUTTON_PRESSED || ButtonY2State == BUTTON_PRESSED) ? HIGH : LOW);
 
  
-    uint8_t checksum = ((x >> 8 ) & 0xFF) + (x & 0xFF) + ((y >> 8 ) & 0xFF) + (y & 0xFF);
-    Serial.write((x >> 8 ) & 0xFF);
-    Serial.write(x & 0xFF);
-    Serial.write((y >> 8 ) & 0xFF);
-    Serial.write(y & 0xFF);
-    Serial.write(checksum);
-    // datachanged = false;
+  uint8_t checksum = ((x >> 8 ) & 0xFF) + (x & 0xFF) + ((y >> 8 ) & 0xFF) + (y & 0xFF);
+  Serial.write((x >> 8 ) & 0xFF);
+  Serial.write(x & 0xFF);
+  Serial.write((y >> 8 ) & 0xFF);
+  Serial.write(y & 0xFF);
+  Serial.write(checksum);
   delay(50);
 }
 
